@@ -15,12 +15,10 @@ class Checkstatus
 	    $collection->addFieldToFilter('qty', array('lt' => 4));
 	    $collection->addFieldToFilter('is_in_stock', 1);
 
-	    /*foreach($collection as $item) {
+	    foreach($collection as $item) {
 	        $item->setData('is_in_stock', 0);
 	    }
 	    $collection->save();
-	    */
-	    return $collection;
 	}
 	public function setBackInStock()
 	{
@@ -29,28 +27,15 @@ class Checkstatus
 	    $collection->addFieldToFilter('qty', array('gt' => $outQty));
 	    $collection->addFieldToFilter('is_in_stock', 0);
 
-	    /*
 	    foreach($collection as $item) {
 	        $item->setData('is_in_stock', 1);
 	    }
 	    $collection->save();
-	    */
-	    return $collection;
 	}
 	public function main()
 	{
-		$configCollection = $this->setBackOutStock();
-		foreach($configCollection as $confProd)
-		{
-			echo "Id: ".$confProd->getProductId()." - Qty: ".$confProd->getQty()."\n\r";
-		}
-		echo "\r\n*********************\r\n";
-		$configCollectionIn = $this->setBackInStock();
-		foreach($configCollectionIn as $confProdIn)
-		{
-			echo "Id- ".$confProdIn->getProductId()." : Qty- ".$confProdIn->getQty()."\n\r";
-		}
-
+		$this->setBackOutStock();
+		$this->setBackInStock();
 	}
 }
 
