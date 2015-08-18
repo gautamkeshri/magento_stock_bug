@@ -7,6 +7,7 @@ Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 
 class Checkstatus
 {
+	private $log_msg;
 	
 	public function setBackOutStock()
 	{
@@ -16,9 +17,11 @@ class Checkstatus
 	    $collection->addFieldToFilter('is_in_stock', 1);
 
 	    foreach($collection as $item) {
+	    	var_dump($item->getData());die;
+	    	$this->log_msg .= "Make Out:".$item->getSku()."\r\n";
 	        $item->setData('is_in_stock', 0);
 	    }
-	    $collection->save();
+	    //$collection->save();
 	}
 	public function setBackInStock()
 	{
@@ -28,14 +31,17 @@ class Checkstatus
 	    $collection->addFieldToFilter('is_in_stock', 0);
 
 	    foreach($collection as $item) {
+	    	$this->log_msg .= "Make In:".$item->getSku()."\r\n";
 	        $item->setData('is_in_stock', 1);
 	    }
-	    $collection->save();
+	    //$collection->save();
 	}
 	public function main()
 	{
+		$this->log_msg="";
 		$this->setBackOutStock();
 		$this->setBackInStock();
+		echo $this->log_msg;
 	}
 }
 
