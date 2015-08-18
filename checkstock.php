@@ -12,7 +12,7 @@ class Checkstatus
 	{
 		//$outQty = Mage::getStoreConfig('cataloginventory/item/options_min_qty');	
 	    $collection = Mage::getResourceModel('cataloginventory/stock_item_collection');
-	    $collection->addFieldToFilter('qty', array('lt' => 4));
+	    $collection->addFieldToFilter('qty', array('lteq' => 4));
 	    $collection->addFieldToFilter('is_in_stock', 1);
 
 	    foreach($collection as $item) {
@@ -24,7 +24,7 @@ class Checkstatus
 	{
 		//$outQty = Mage::getStoreConfig('cataloginventory/item/options_min_qty');
 	    $collection = Mage::getResourceModel('cataloginventory/stock_item_collection');
-	    $collection->addFieldToFilter('qty', array('gt' => $outQty));
+	    $collection->addFieldToFilter('qty', array('gt' => 4));
 	    $collection->addFieldToFilter('is_in_stock', 0);
 
 	    foreach($collection as $item) {
