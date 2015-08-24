@@ -84,6 +84,7 @@ class Checkstatus
 		$this->log_msg="";
 		$this->setBackOutStock();
 		$this->setBackInStock();
+		$this->setBackInStockConfig();
 		return $this->log_msg;
 	}
 }
