@@ -48,7 +48,7 @@ class Checkstatus
 
 
                     if ($childStockQty > 0 && $product->getIsInStock() == Mage_CatalogInventory_Model_Stock_Status::STATUS_OUT_OF_STOCK) {
-                        echo 'Found configurable that is out of stock, but has stock children : setting in stock. ' . $product->getSku() . "\n";
+                        $this->log_msg .= 'Found configurable that is out of stock, but has stock children : setting in stock. ' . $product->getSku() . "\n";
                         mage::log('Found configurable that is out of stock, but has stock children : setting in stock. ' . $product->getSku());
                         if ($this->getArg('dry-run') == false) {
                             $stockObject->setIsInStock(True);
@@ -56,7 +56,7 @@ class Checkstatus
                             $this->_doReindexFlag = true;
                         }
                     } elseif ($childStockQty == 0 && $product->getIsInStock() == Mage_CatalogInventory_Model_Stock_Status::STATUS_IN_STOCK) {
-                        echo 'Found configurable that is in stock , but has no stock children : setting out of stock. ' . $product->getSku() . "\n";
+                        $this->log_msg .= 'Found configurable that is in stock , but has no stock children : setting out of stock. ' . $product->getSku() . "\n";
                         mage::log('Found configurable that is in stock , but has no stock children : setting out of stock. ' . $product->getSku());
                         if ($this->getArg('dry-run') == false) {
                             $stockObject->setIsInStock(False);
@@ -66,7 +66,7 @@ class Checkstatus
                     }
                 } else {
                     if ($product->getSku() != '') {
-                        echo 'Found configurable that has no children : setting out of stock. ' . $product->getSku() . "\n";
+                        $this->log_msg .= 'Found configurable that has no children : setting out of stock. ' . $product->getSku() . "\n";
                         mage::log('Found configurable that has no children : setting out of stock. ' . $product->getSku());
                         if ($this->getArg('dry-run') == false) {
                             $stockObject->setIsInStock(False);
